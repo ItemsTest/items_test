@@ -7,17 +7,12 @@ trigger:
 - master
 
 pool:
-  vmImage: ubuntu-latest
+ vmImage: 'windows-latest'
+variables:
+  BuildConfiguration: 'Release'
+  SolutionPath: '/items/Items.tests.sln'   
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-  
+steps:  
 - task: UseDotNet@2
   displayName: 'Install .NET Core SDK'
   inputs:
@@ -26,8 +21,9 @@ steps:
     includePreviewVersions: true # Required for preview versions
     
 - task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    command: test
-    solution: {tests/Items.tests.csproj}
-    arguments: '--configuration $(buildConfiguration)' # Update this to match your need
+ inputs:
+ command: test
+ projects: $SolutionPath
+ arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+    
+ 
