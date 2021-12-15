@@ -19,9 +19,9 @@ steps:
     publishTestResults: true
     projects: 'tests/Items.tests' # update with your test project directory
     
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet run'
-  inputs:
-    command: 'run' 
-    projects: 'src/ItemsApi' # update with your test project directory  
+#- task: DotNetCoreCLI@2
+ # displayName: 'dotnet run'
+ # inputs:
+  #  command: 'run' 
+ #   projects: 'src/ItemsApi' # update with your test project directory  
 
