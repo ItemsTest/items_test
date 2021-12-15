@@ -28,7 +28,6 @@ namespace Items.tests
             Assert.IsType<ItemsModel>(item.Value);
             var itemValues = item.Value as ItemsModel;
             int count = itemValues.count;
-            Console.WriteLine(count);
             Assert.True(count <= 10);
         }
         [Theory]
