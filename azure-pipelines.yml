@@ -9,7 +9,7 @@ trigger:
 pool:
  vmImage: 'windows-latest'
 variables:
-  SolutionPath: '/items/Items.tests.sln'   
+  SolutionPath: 'items/Items.tests.sln'   
 
 steps:  
 - task: UseDotNet@2
@@ -20,8 +20,9 @@ steps:
     includePreviewVersions: true # Required for preview versions
     
 - task: DotNetCoreCLI@2
- command: test
- projects: $SolutionPath
- arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+ inputs:
+  command: test
+  projects: $SolutionPath
+  arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
     
  
