@@ -9,7 +9,6 @@ trigger:
 pool:
  vmImage: 'windows-latest'
 variables:
-  BuildConfiguration: 'Release'
   SolutionPath: '/items/Items.tests.sln'   
 
 steps:  
