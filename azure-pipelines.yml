@@ -8,6 +8,7 @@ trigger:
 
 pool:
  vmImage: 'windows-latest'
+ 
 - task: UseDotNet@2
   inputs:
     version: '5.0.x'
