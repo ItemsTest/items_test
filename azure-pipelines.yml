@@ -29,5 +29,5 @@ steps:
   displayName: Build
   inputs:
     command: test
-    solution: '/tests/Items.tests.csproj'
+    solution: {tests/Items.tests.csproj}
     arguments: '--configuration $(buildConfiguration)' # Update this to match your need
