@@ -8,21 +8,28 @@ trigger:
 
 pool:
  vmImage: 'windows-latest'
-variables:
-  SolutionPath: 'items/Items.tests.sln'   
-
-steps:  
 - task: UseDotNet@2
-  displayName: 'Install .NET Core SDK'
   inputs:
-    version: 5.0.209
-    performMultiLevelLookup: true
+    version: '5.0.x'
     includePreviewVersions: true # Required for preview versions
-    
+  
 - task: DotNetCoreCLI@2
- inputs:
-  command: test
-  projects: $SolutionPath
-  arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
-    
+  displayName: 'dotnet build'
+  inputs:
+    command: 'build'
+    configuration: $(buildConfiguration)
+  
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: 'test'
+    arguments: '--configuration $(buildConfiguration) --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura'
+    publishTestResults: true
+    projects: 'tests/Items.tests' # update with your test project directory
+  
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish code coverage report'
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
  
